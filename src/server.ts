@@ -38,7 +38,8 @@ const init = async () => {
     })
     //TODO: Delete a Todo
     server.route({
-
+        method: '',
+        path: ''
     })
     //Update a todo
     server.route({
