@@ -1,10 +1,13 @@
 import Hapi, { server } from '@hapi/hapi'
 import mongoose from 'mongoose'
-import Todo from './todo.module'
+
+import TodoPlugin from './routes/Todos'
+import userPlugin from './routes/User'
+
 
 const url = "mongodb+srv://lantei:lantei95@cluster0.aybaugd.mongodb.net/todoist?retryWrites=true&w=majority"
 
-mongoose.connect(url, () =>{
+mongoose.connect(url, () => {
     console.log('Connected to Database')
 })
 
@@ -15,10 +18,10 @@ const init = async () => {
     })
 
     server.route({
-        method: 'GET', 
+        method: 'GET',
         path: '/',
         handler: (req, res) => {
-            return res.response({talkback: 'Hello world'})
+            return res.response({ talkback: 'Hello world' })
         }
     })
     //TODO: View all Todos. 
@@ -69,7 +72,7 @@ process.on('unhandledRejection', (err) => {
 
 init();
 
-//Data Types. 
+//Data Types.
 //Primistiva and complex.
-//Number 1 string '' "", boolean true or false, float 1.4 double 1.5....., 
+//Number 1 string '' "", boolean true or false, float 1.4 double 1.5.....,
 //Arrays [], objects {}
