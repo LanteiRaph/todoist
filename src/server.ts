@@ -1,4 +1,12 @@
 import Hapi, { server } from '@hapi/hapi'
+import mongoose from 'mongoose'
+import Todo from './todo.module'
+
+const url = "mongodb+srv://lantei:lantei95@cluster0.aybaugd.mongodb.net/todoist?retryWrites=true&w=majority"
+
+mongoose.connect(url, () =>{
+    console.log('Connected to Database')
+})
 
 const init = async () => {
     const server = Hapi.server({
@@ -14,7 +22,7 @@ const init = async () => {
         }
     })
     //TODO: View all Todos. 
-    //TODO: Add A Todo. 
+    //Add A Todo. 
     server.route({
         method: 'POST', 
         path: '/addTodo', 
@@ -22,12 +30,28 @@ const init = async () => {
             //We get the todo from the req
             const todo = req.payload
             //Create a new to/ Save to the database
+            const newtodo = new Todo(todo)
+            newtodo.save();
             //Return the todo that was added.
-            return todo
+            return newtodo
         }
     })
     //TODO: Delete a Todo
-    //TODO: Update a todo
+    server.route({
+
+    })
+    //Update a todo
+    server.route({
+        method: 'PUT', 
+        path: '/updateTodo/{todoID}', 
+        handler: async  (req, res) => {
+            //Get the todos id. 
+            const {todoID} = req.params
+            //Update the given id with the values
+            const todo = Todo.findById(todoID)
+            return await todo.updateOne({$set: req.payload}) 
+        }
+    })
     //TODO: Login
     //TODO: SignUp
     //TODO: Logout
