@@ -9,6 +9,7 @@
     "dev": "ts-node-dev src/server.ts"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/hapi__hapi": "^20.0.13",
     "@types/node": "^18.11.9",
     "ts-node-dev": "^2.0.0",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "@hapi/hapi": "^21.0.0",
+    "bcrypt": "^5.1.0",
     "mongoose": "^6.7.2"
   }
 }

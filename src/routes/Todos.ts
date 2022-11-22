@@ -6,13 +6,27 @@ const TodoPlugin = {
     name: 'app/Todo',
     register: (server: Hapi.Server) => {
         //register our routes
-        //TODO: View all Todos.
+        //sView all Todos.
         server.route({
             method: 'GET',
             path: '/todos',
             handler: async () => {
                 const todos = await Todo.find()
                 return todos
+            }
+        })
+        //TODO: Get Todo for the current user.
+        server.route({
+            method: 'GET', 
+            path: '/todos/{userId}',
+            handler: async (req, res) => {
+                //Egt the id fo the user
+                const {userId} = req.params
+                console.log(userId)
+                //find all todos for the given user
+                const userTodos = await Todo.findById(userId)
+                console.log(userTodos)
+                return userTodos
             }
         })
         //Add A Todo.
@@ -35,9 +49,10 @@ const TodoPlugin = {
             path: '/deleteTodo/{todoID}',
             handler: async (req, res) => {
                 const { todoID } = req.params
+                console.log('hey')
                 const deletedTodo = Todo.findById(todoID)
                 await deletedTodo.deleteOne();
-                res.response({ msg: 'Todo has been deleted' })
+                return res.response({ msg: 'Todo has been deleted' })
             }
         })
         //Update a todo
