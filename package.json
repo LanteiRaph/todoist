@@ -1,0 +1,11 @@
+{
+  "name": "todoistbackend",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "repository": "https://github.com/LanteiRaph/todoist.git",
+  "author": "harbert and lantei",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
+}
